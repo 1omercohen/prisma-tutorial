@@ -6,7 +6,7 @@ import {
     getTasksHandler,
     updateTaksByIdHandler,
 } from "../controllers/task";
-import validation from "../middlewares/validation";
+import { validation } from "../middlewares/validation";
 import { createTaskSchema, taskCommonSchema } from "../middlewares/schema";
 
 const taskRoutes = Router();

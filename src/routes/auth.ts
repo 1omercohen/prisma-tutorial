@@ -4,7 +4,7 @@ import {
     logoutHandler,
     registerHandler,
 } from "../controllers/auth";
-import validation from "../middlewares/validation";
+import { validation } from "../middlewares/validation";
 import { registerSchema, loginSchema } from "../middlewares/schema";
 
 const authRoutes = Router();

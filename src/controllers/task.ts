@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import catchAsync from "../utils/catchAsync";
+import { catchAsync } from "../utils/catchAsync";
 
 export const getTasksHandler = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
