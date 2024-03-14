@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -19,6 +20,12 @@ enum Role {
   ADMIN
 }
 
+enum Status {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+}
+
 model User {
   id         String     @id @default(cuid())
   first_name String
@@ -27,18 +34,19 @@ model User {
   password   String
   role       Role       @default(MEMBER)
   created_at DateTime   @default(now())
-  Reporter   Reporter[]
-  AssignTo   AssignTo[]
+  reporter   Reporter[]
+  assign_to  AssignTo[]
 }
 
 model Task {
   id          String     @id @default(uuid())
   title       String
-  description String
+  discription String
+  status      Status     @default(TODO)
   created_at  DateTime   @default(now())
   modified    DateTime   @updatedAt
-  Reporter    Reporter[]
-  AssignTo    AssignTo[]
+  reporter    Reporter[]
+  assign_to   AssignTo[]
 }
 
 model Reporter {

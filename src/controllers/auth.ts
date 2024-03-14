@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { catchAsync } from "../utils/catchAsync";
 import { createUser, getUser } from "../services/auth";
 import { createSendToken } from "../utils";
+import { ErrorResponse } from "../utils/error";
 
 export const registerHandler = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
@@ -18,6 +19,7 @@ export const loginHandler = catchAsync(
         const user = await getUser(req.body.email);
         if (await bcrypt.compare(req.body.password, user.password))
             return createSendToken(user.id, 200, res);
+        return next(new ErrorResponse("Somthing Worng", 400));
     }
 );
 

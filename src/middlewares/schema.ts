@@ -23,7 +23,7 @@ const commonValidation = {
         .refine((pass) => /\d/.test(pass), {
             message: "Password must container atleast one digit",
         })
-        .refine((pass) => /\W_/.test(pass), {
+        .refine((pass) => /\W/.test(pass), {
             message: "Password must contain atleast one special character",
         }),
 };
@@ -44,11 +44,15 @@ export const loginSchema = z.object({
 });
 
 export const createTaskSchema = z.object({
-    title: z.string({
-        required_error: "Title is required",
-    }),
-    discription: z.string({
-        required_error: "Discription is required",
+    body: z.object({
+        title: z.string({
+            required_error: "Title is required",
+            invalid_type_error: "Title must be a string",
+        }),
+        discription: z.string({
+            required_error: "Discription is required",
+            invalid_type_error: "Discription must be a string",
+        }),
     }),
 });
 

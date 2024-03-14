@@ -13,3 +13,18 @@ export const getUser = (email: string) => {
         select: { id: true, password: true },
     });
 };
+
+export const getUserById = (userId: string) =>
+    client.user.findUniqueOrThrow({
+        where: {
+            id: userId,
+        },
+        select: {
+            id: true,
+            first_name: true,
+            last_name: true,
+            email: true,
+            role: true,
+            created_at: true,
+        },
+    });

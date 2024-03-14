@@ -8,12 +8,13 @@ import {
 } from "../controllers/task";
 import { validation } from "../middlewares/validation";
 import { createTaskSchema, taskCommonSchema } from "../middlewares/schema";
+import { authMiddleware } from "../middlewares/auth";
 
 const taskRoutes = Router();
 
 taskRoutes
-    .get("/", getTasksHandler)
-    .post("/", validation(createTaskSchema), createTaskHandler);
+    .get("/", authMiddleware, getTasksHandler)
+    .post("/", authMiddleware, validation(createTaskSchema), createTaskHandler);
 
 taskRoutes
     .get("/:id", validation(taskCommonSchema), getTaskByIdHandler)
